@@ -7,10 +7,26 @@ import MainContext from './MainContext'
 
 function App() {
 
-  const [currentAlgorithm, setCurrentAlgorithm] = useState(STORE.algo1)
+  
+  const [algoIndex, setAlgoIndex] = useState(0)
+ 
+  const onNextPressed = () => {
+    if(algoIndex === STORE.length - 1){
+      setAlgoIndex(0)
+    }else{
+      setAlgoIndex(algoIndex + 1)
+    }
+    
+  }
+
+  const contextParams = {
+    currentAlgorithm: STORE[algoIndex],
+    onNextPressed: onNextPressed
+  }
+
   
   return (
-    <MainContext.Provider value = {currentAlgorithm}>
+    <MainContext.Provider value = {contextParams}>
     <div className="App">
       <header className="App-header">
         <h1>Algorithm Jumble</h1>

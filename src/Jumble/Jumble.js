@@ -1,4 +1,4 @@
-import React, { useState, useContext } from 'react';
+import React, { useState, useEffect, useContext } from 'react';
 import './Jumble.css';
 import MainContext from '../MainContext'
 import { DragDropContext, Droppable, Draggable } from 'react-beautiful-dnd';
@@ -6,8 +6,14 @@ import { DragDropContext, Droppable, Draggable } from 'react-beautiful-dnd';
 
 function Jumble() {
 
-  const currentAlgorithm = useContext(MainContext)
-  const [steps, updateSteps] = useState(currentAlgorithm.items);
+  const mainContext = useContext(MainContext)
+  const [steps, updateSteps] = useState(mainContext.currentAlgorithm.items);
+
+  
+  useEffect(() => {
+    updateSteps(mainContext.currentAlgorithm.items)
+  }, [mainContext.currentAlgorithm.items])
+
 
   const onDragEnd = (result) => {
     const items = Array.from(steps);
@@ -15,6 +21,7 @@ function Jumble() {
     items.splice(result.destination.index, 0, reorderedItem);
     updateSteps(items);
   }
+
 
   return (
     <>
