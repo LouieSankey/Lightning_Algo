@@ -1,0 +1,25 @@
+.drag-list-header {
+    text-align: left;
+    font-size: 20px;
+}
+
+.step {
+    list-style: none;
+    padding-left: 0;
+}
+
+.step li {
+    font-size: 14px;
+    display: flex;
+    align-items: center;
+    border: solid 2px #d0d0d0;
+    border-radius: .2em;
+    padding: .5em .8em .5em .5em;
+    margin-bottom: 1em;
+}
+
+.step p {
+    max-width: none;
+    font-weight: bold;
+    margin: 0;
+}
