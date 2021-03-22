@@ -6,3 +6,13 @@
 .algorithm-description {
     text-align: left;
 }
+
+.submit-button {
+    width: 100%;
+    padding: 6px 0;
+}
+
+.next-button {
+    width: 100%;
+    padding: 6px 0;
+}

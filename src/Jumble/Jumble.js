@@ -1,11 +1,13 @@
-import React, { useState } from 'react';
+import React, { useState, useContext } from 'react';
 import './Jumble.css';
+import MainContext from '../MainContext'
 import { DragDropContext, Droppable, Draggable } from 'react-beautiful-dnd';
 
 
-function Jumble(props) {
+function Jumble() {
 
-  const [steps, updateSteps] = useState(props.items);
+  const currentAlgorithm = useContext(MainContext)
+  const [steps, updateSteps] = useState(currentAlgorithm.items);
 
   const onDragEnd = (result) => {
     const items = Array.from(steps);
