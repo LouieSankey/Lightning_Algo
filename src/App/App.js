@@ -8,7 +8,7 @@ import MainContext from '../MainContext'
 function App() {
   
   const [algoIndex, setAlgoIndex] = useState(0)
-  const [steps, updateSteps] = useState(shuffleArray(STORE[algoIndex].steps));
+  const [steps, updateSteps] = useState(shuffleSteps(STORE[algoIndex].steps));
   const [showHide, setShowHide] = useState("hide")
 
  
@@ -25,7 +25,7 @@ function App() {
     setShowHide("")
   }
 
-  function shuffleArray(array) {
+  function shuffleSteps(array) {
     for (let i = array.length - 1; i > 0; i--) {
         const j = Math.floor(Math.random() * (i + 1));
         [array[i], array[j]] = [array[j], array[i]];
