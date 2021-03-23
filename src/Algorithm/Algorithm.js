@@ -18,7 +18,7 @@ const currentAlgorithm = context.currentAlgorithm
       <p className="algorithm-description">{currentAlgorithm.description.output}</p>
       <p className="algorithm-description">{currentAlgorithm.description.explanation}</p>
       <div className="row">
-        <div className="column"><button className="submit-button">CHECK</button></div>
+        <div className="column"><button className="submit-button" onClick={context.onCheckPressed}>CHECK</button></div>
         <div className="column"><button className="next-button" onClick={context.onNextPressed}>NEXT</button></div>
       </div>
      

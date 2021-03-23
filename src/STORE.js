@@ -12,68 +12,68 @@ const STORE = [
         items: [
 
             {
+                id: '0',
+                item: 'const intersection = (nums1, nums2) => {',
+            },
+            {
                 id: '1',
-                name: 'const intersection = (nums1, nums2) => {',
+                item: 'const map = new Map()',
             },
             {
                 id: '2',
-                name: 'const map = new Map()',
+                item: ' for (const n of nums1) {',
             },
             {
                 id: '3',
-                name: ' for (const n of nums1) {',
+                item: 'if (map.has(n)) {',
             },
             {
                 id: '4',
-                name: 'if (map.has(n)) {',
+                item: 'map.set(n, map.get(n) + 1)',
             },
             {
                 id: '5',
-                name: 'map.set(n, map.get(n) + 1)',
+                item: ' } else {',
             },
             {
                 id: '6',
-                name: ' } else {',
+                item: ' map.set(n, 1)',
             },
             {
                 id: '7',
-                name: ' map.set(n, 1)',
+                item: '}}',
             },
             {
                 id: '8',
-                name: '}}',
+                item: 'const result = []',
             },
             {
                 id: '9',
-                name: 'const result = []',
+                item: 'for (const n of nums2) {',
             },
             {
                 id: '10',
-                name: 'for (const n of nums2) {',
+                item: ' if (map.has(n) && map.get(n) > 0) {',
             },
             {
                 id: '11',
-                name: ' if (map.has(n) && map.get(n) > 0) {',
+                item: 'result.push(n)',
             },
             {
                 id: '12',
-                name: 'result.push(n)',
+                item: 'map.set(n, map.get(n) - 1)',
             },
             {
                 id: '13',
-                name: 'map.set(n, map.get(n) - 1)',
+                item: '}}',
             },
             {
                 id: '14',
-                name: '}}',
+                item: ' return result',
             },
             {
                 id: '15',
-                name: ' return result',
-            },
-            {
-                id: '16',
-                name: '}',
+                item: '}',
             }
         ]
     },  
@@ -90,68 +90,68 @@ const STORE = [
            
 
             {
+                id: '0',
+                item: 'const romanToInt = s => {',
+            },
+            {
                 id: '1',
-                name: 'const romanToInt = s => {',
+                item: 'if (!s || s.length === 0) {',
             },
             {
                 id: '2',
-                name: 'if (!s || s.length === 0) {',
+                item: 'return 0 }',
             },
             {
                 id: '3',
-                name: 'return 0 }',
+                item: 'const map = ',
             },
             {
                 id: '4',
-                name: 'const map = ',
+                item: "new Map([['I', 1], ['V', 5], ['X', 10], ['L', 50], ['C', 100], ['D', 500], ['M', 1000]])",
             },
             {
                 id: '5',
-                name: "new Map([['I', 1], ['V', 5], ['X', 10], ['L', 50], ['C', 100], ['D', 500], ['M', 1000]])",
+                item: 'let i = s.length - 1',
             },
             {
                 id: '6',
-                name: 'let i = s.length - 1',
+                item: 'let result = map.get(s[i])',
             },
             {
                 id: '7',
-                name: 'let result = map.get(s[i])',
+                item: 'while (i > 0) {',
             },
             {
                 id: '8',
-                name: 'while (i > 0) {',
+                item: 'const curr = map.get(s[i]);',
             },
             {
                 id: '9',
-                name: 'const curr = map.get(s[i]);',
+                item: 'const prev = map.get(s[i - 1])',
             },
             {
                 id: '10',
-                name: 'const prev = map.get(s[i - 1])',
+                item: 'if (prev >= curr) {',
             },
             {
                 id: '11',
-                name: 'if (prev >= curr) {',
+                item: 'result += prev',
             },
             {
                 id: '12',
-                name: 'result += prev',
+                item: '} else {',
             },
             {
                 id: '13',
-                name: '} else {',
+                item: 'result -= prev }',
             },
             {
                 id: '14',
-                name: 'result -= prev }',
+                item: 'i-- }',
             },
             {
                 id: '15',
-                name: 'i-- }',
-            },
-            {
-                id: '16',
-                name: 'return result }',
+                item: 'return result }',
             }
         ]
     },
@@ -167,76 +167,76 @@ const STORE = [
         items: [
 
             {
+                id: '0',
+                item: 'const pascalsTriangle = (numRows) => {',
+            },
+            {
                 id: '1',
-                name: 'const pascalsTriangle = (numRows) => {',
+                item: 'if (numRows === 0) {',
             },
             {
                 id: '2',
-                name: 'if (numRows === 0) {',
+                item: 'return []}',
             },
             {
                 id: '3',
-                name: 'return []}',
+                item: 'const result = []',
             },
             {
                 id: '4',
-                name: 'const result = []',
+                item: 'for (let i = 0; i < numRows; i++) {',
             },
             {
                 id: '5',
-                name: 'for (let i = 0; i < numRows; i++) {',
+                item: 'let currRow = []',
             },
             {
                 id: '6',
-                name: 'let currRow = []',
+                item: 'for (let j = 0; j <= i; j++) {',
             },
             {
                 id: '7',
-                name: 'for (let j = 0; j <= i; j++) {',
+                item: 'if (j === 0 || j === i){',
             },
             {
                 id: '8',
-                name: 'if (j === 0 || j === i){',
+                item: 'currRow.push(1)',
             },
             {
                 id: '9',
-                name: 'currRow.push(1)',
+                item: '} else {',
             },
             {
                 id: '10',
-                name: '} else {',
+                item: 'currRow.push(',
             },
             {
                 id: '11',
-                name: 'currRow.push(',
+                item: 'result[i - 1]',
             },
             {
                 id: '12',
-                name: 'result[i - 1]',
+                item: '[j - 1]',
             },
             {
                 id: '13',
-                name: '[j - 1]',
+                item: '+ result[i - 1]',
             },
             {
                 id: '14',
-                name: '+ result[i - 1]',
+                item: '[j])',
             },
             {
                 id: '15',
-                name: '[j])',
+                item: '}}',
             },
             {
                 id: '16',
-                name: '}}',
+                item: 'result.push(currRow) }',
             },
             {
                 id: '17',
-                name: 'result.push(currRow) }',
-            },
-            {
-                id: '18',
-                name: 'return result }',
+                item: 'return result }',
             }
         ]
     }

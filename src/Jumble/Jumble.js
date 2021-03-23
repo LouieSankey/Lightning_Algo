@@ -7,20 +7,18 @@ import { DragDropContext, Droppable, Draggable } from 'react-beautiful-dnd';
 function Jumble() {
 
   const mainContext = useContext(MainContext)
-  const [steps, updateSteps] = useState(mainContext.currentAlgorithm.items);
 
-  
   useEffect(() => {
-    updateSteps(mainContext.currentAlgorithm.items)
+    mainContext.updateSteps(mainContext.currentAlgorithm.items)
   }, [mainContext.currentAlgorithm.items])
 
 
   const onDragEnd = (result) => {
-    const items = Array.from(steps);
+    const items = Array.from(mainContext.steps);
     const [reorderedItem] = items.splice(result.source.index, 1);
     items.splice(result.destination.index, 0, reorderedItem);
-    updateSteps(items);
-  }
+    mainContext.updateSteps(items);
+  } 
 
 
   return (
@@ -30,14 +28,15 @@ function Jumble() {
         <Droppable droppableId="step">
           {(provided) => (
             <ul className="step" {...provided.droppableProps} ref={provided.innerRef}>
-              {steps.map(({ id, name, thumb }, index) => {
+              {mainContext.steps.map(({ id, item }, index) => {
                 return (
                   <Draggable key={id} draggableId={id} index={index}>
                     {(provided) => (
                       <li key={id} ref={provided.innerRef} {...provided.draggableProps} {...provided.dragHandleProps}>
                         <p>
-                          {name}
+                          {item}
                         </p>
+                        <div className={"circle " + (id == index ? " blue " : " red ") + mainContext.showHide}></div>
                       </li>
                     )}
                   </Draggable>

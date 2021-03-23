@@ -1,7 +1,8 @@
 import React from "react";
 const MainContext = React.createContext({
     onNextPressed: () => {},
-    onSubmitPressed: () => {}
+    onSubmitPressed: () => {},
+    onCheckPressed: () => {}
 });
 export default MainContext;
 

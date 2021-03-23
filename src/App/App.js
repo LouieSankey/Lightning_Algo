@@ -1,27 +1,37 @@
 import React, { useState } from 'react';
 import './App.css';
-import Jumble from './Jumble/Jumble'
-import Algorithm from './Algorithm/Algorithm'
-import STORE from './STORE'
-import MainContext from './MainContext'
+import Jumble from '../Jumble/Jumble'
+import Algorithm from '../Algorithm/Algorithm'
+import STORE from '../STORE'
+import MainContext from '../MainContext'
 
 function App() {
-
   
   const [algoIndex, setAlgoIndex] = useState(0)
+  const [steps, updateSteps] = useState(STORE[algoIndex].items);
+  const [showHide, setShowHide] = useState("hide")
+
  
   const onNextPressed = () => {
+    setShowHide("hide")
     if(algoIndex === STORE.length - 1){
       setAlgoIndex(0)
     }else{
       setAlgoIndex(algoIndex + 1)
     }
-    
+  }
+
+  const onCheckPressed = () => {
+    setShowHide("")
   }
 
   const contextParams = {
     currentAlgorithm: STORE[algoIndex],
-    onNextPressed: onNextPressed
+    onNextPressed: onNextPressed,
+    onCheckPressed: onCheckPressed,
+    updateSteps: updateSteps,
+    showHide: showHide,
+    steps: steps
   }
 
   

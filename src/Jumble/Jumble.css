@@ -10,7 +10,7 @@
 
 .step li {
     font-size: 14px;
-    display: flex;
+    display: flow-root;
     align-items: center;
     border: solid 2px #d0d0d0;
     border-radius: .2em;
@@ -22,4 +22,25 @@
     max-width: none;
     font-weight: bold;
     margin: 0;
+    float: left;
+}
+
+.circle {
+    float: right;
+    height: 20px;
+    width: 20px;
+    background-color: transparent;
+    border-radius: 50%;
+}
+
+.red {
+    background-color: red;
+}
+
+.blue {
+    background-color: blue;
+}
+
+.hide {
+    display: none
 }
