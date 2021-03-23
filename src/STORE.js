@@ -9,7 +9,7 @@ const STORE = [
             output: "Output: [4,9]",
             explanation: "Explanation: [9,4] is also accepted."
         },
-        items: [
+        steps: [
 
             {
                 id: '0',
@@ -86,7 +86,7 @@ const STORE = [
             output: "Output: 58",
             explanation: "Explanation: L = 50, V= 5, III = 3"
         },
-        items: [
+        steps: [
            
 
             {
@@ -164,7 +164,7 @@ const STORE = [
             output: "Output: [[1],[1,1],[1,2,1],[1,3,3,1],[1,4,6,4,1]]",
             explanation: ""
         },
-        items: [
+        steps: [
 
             {
                 id: '0',

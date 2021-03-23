@@ -8,7 +8,7 @@ import MainContext from '../MainContext'
 function App() {
   
   const [algoIndex, setAlgoIndex] = useState(0)
-  const [steps, updateSteps] = useState(STORE[algoIndex].items);
+  const [steps, updateSteps] = useState(shuffleArray(STORE[algoIndex].steps));
   const [showHide, setShowHide] = useState("hide")
 
  
@@ -25,13 +25,21 @@ function App() {
     setShowHide("")
   }
 
+  function shuffleArray(array) {
+    for (let i = array.length - 1; i > 0; i--) {
+        const j = Math.floor(Math.random() * (i + 1));
+        [array[i], array[j]] = [array[j], array[i]];
+    }
+    return array
+}
+
   const contextParams = {
     currentAlgorithm: STORE[algoIndex],
+    showHide: showHide,
+    steps: steps,
     onNextPressed: onNextPressed,
     onCheckPressed: onCheckPressed,
     updateSteps: updateSteps,
-    showHide: showHide,
-    steps: steps
   }
 
   

@@ -7,17 +7,18 @@ import { DragDropContext, Droppable, Draggable } from 'react-beautiful-dnd';
 function Jumble() {
 
   const mainContext = useContext(MainContext)
+  
 
   useEffect(() => {
-    mainContext.updateSteps(mainContext.currentAlgorithm.items)
-  }, [mainContext.currentAlgorithm.items])
+    mainContext.updateSteps(mainContext.currentAlgorithm.steps)
+  }, [mainContext.currentAlgorithm.steps])
 
 
   const onDragEnd = (result) => {
-    const items = Array.from(mainContext.steps);
-    const [reorderedItem] = items.splice(result.source.index, 1);
-    items.splice(result.destination.index, 0, reorderedItem);
-    mainContext.updateSteps(items);
+    const steps = Array.from(mainContext.steps);
+    const [reorderedItem] = steps.splice(result.source.index, 1);
+    steps.splice(result.destination.index, 0, reorderedItem);
+    mainContext.updateSteps(steps);
   } 
 
 

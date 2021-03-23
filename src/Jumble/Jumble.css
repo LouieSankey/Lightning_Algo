@@ -11,7 +11,7 @@
 .step li {
     font-size: 14px;
     display: flow-root;
-    align-items: center;
+    align-steps: center;
     border: solid 2px #d0d0d0;
     border-radius: .2em;
     padding: .5em .8em .5em .5em;
@@ -27,8 +27,8 @@
 
 .circle {
     float: right;
-    height: 20px;
-    width: 20px;
+    height: 14px;
+    width: 14px;
     background-color: transparent;
     border-radius: 50%;
 }

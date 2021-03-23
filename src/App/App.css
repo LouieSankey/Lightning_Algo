@@ -7,7 +7,7 @@
 .App-header {
     display: flex;
     flex-direction: column;
-    align-items: center;
+    align-steps: center;
     justify-content: center;
     font-size: calc(10px + 1.5vmin);
 }
