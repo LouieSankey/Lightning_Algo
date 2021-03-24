@@ -8,9 +8,7 @@ function Jumble() {
 
   const context = useContext(MainContext)
   
-  //currentAlgorithm will initially come from STORE[algoIndex]
-  //I did this here so that when the currentAlgorithm changes
-  //the current steps will also change
+  //I did this here to avoid buggy behavior with keeping state for the Dropable interface
   useEffect(() => {
     context.updateSteps([...shuffleSteps(context.currentAlgorithm.steps)])
   }, [context.currentAlgorithm])
@@ -22,7 +20,6 @@ function Jumble() {
     }
     return array
 }
-
 
 
   const onDragEnd = (result) => {
@@ -48,7 +45,7 @@ function Jumble() {
                         <p>
                           {item}
                         </p>
-                        <div className={"circle " + (id == index ? " blue " : " red ") + context.showHide}></div>
+                        <div className={"circle " + (id == index ? " blue " : " red ") + context.correctOrderIndicator}></div>
                       </li>
                     )}
                   </Draggable>
@@ -59,9 +56,9 @@ function Jumble() {
           )}
         </Droppable>
       </DragDropContext>
-      <div className="row">
-        <div className="column"><button className="submit-button" onClick={context.onCheckPressed}>CHECK</button></div>
-        <div className="column"><button className="next-button" onClick={context.onNextPressed}>NEXT</button></div>
+      <div className="next-check-buttons-row">
+        <div className="next-check-buttons-column"><button className="submit-button" onClick={context.onCheckPressed}>CHECK</button></div>
+        <div className="next-check-buttons-column"><button className="next-button" onClick={context.onNextPressed}>NEXT</button></div>
       </div>
     </>
   );

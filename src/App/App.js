@@ -4,16 +4,17 @@ import Jumble from '../Jumble/Jumble'
 import Algorithm from '../Algorithm/Algorithm'
 import STORE from '../STORE'
 import MainContext from '../MainContext'
+import Menu from '../Menu/Menu'
 
 function App() {
   
   const [algoIndex, setAlgoIndex] = useState(0)
   const [steps, updateSteps] = useState(STORE[algoIndex].steps);
-  const [showHide, setShowHide] = useState("hide")
+  const [correctOrderIndicator, setCorrectOrderIndicator] = useState("hide")
 
  
   const onNextPressed = () => {
-    setShowHide("hide")
+    setCorrectOrderIndicator("hide")
     if(algoIndex === STORE.length - 1){
       setAlgoIndex(0)
     }else{
@@ -22,12 +23,12 @@ function App() {
   }
 
   const onCheckPressed = () => {
-    setShowHide("")
+    setCorrectOrderIndicator("")
   }
 
   const contextParams = {
     currentAlgorithm: STORE[algoIndex],
-    showHide: showHide,
+    correctOrderIndicator: correctOrderIndicator,
     steps: steps,
     onNextPressed: onNextPressed,
     onCheckPressed: onCheckPressed,
@@ -37,21 +38,32 @@ function App() {
   
   return (
     <MainContext.Provider value = {contextParams}>
+      <Menu></Menu>
     <div className="app">
-      <header className="app-header">
-        <h1>Algorithm Jumble</h1>
-        <div className="row">
-          <div className="column">
+      <div className="main">
+        <header>
+        <h1 className="header-text">Algorithm Jumble</h1>
+        <h2 className="sub-header-text">Problem Set: Top 25 Core CS - Easy</h2>
+        </header>
+        <br/>
+        <section>
+        <div className="main-row">
+          <div className="main-column">
             <div className="algo-description">
               <Algorithm/>
             </div>
           </div>
-          <div className="column">
+          <div className="main-column">
           <Jumble/>
           </div>
         </div>
-      </header>
+        </section>
+        <br/>
+   <footer>
+  </footer>
+      </div>
     </div>
+
     </MainContext.Provider>
   );
 }
