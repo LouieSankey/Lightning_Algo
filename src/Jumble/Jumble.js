@@ -8,10 +8,21 @@ function Jumble() {
 
   const mainContext = useContext(MainContext)
   
-
+  //currentAlgorithm will initially come from STORE[algoIndex]
+  //I did this here so that when the currentAlgorithm changes
+  //the current steps will also change
   useEffect(() => {
-    mainContext.updateSteps(mainContext.currentAlgorithm.steps)
-  }, [mainContext.currentAlgorithm.steps])
+    mainContext.updateSteps([...shuffleSteps(mainContext.currentAlgorithm.steps)])
+  }, [mainContext.currentAlgorithm])
+
+  function shuffleSteps(array) {
+    for (let i = array.length - 1; i > 0; i--) {
+        const j = Math.floor(Math.random() * (i + 1));
+        [array[i], array[j]] = [array[j], array[i]];
+    }
+    return array
+}
+
 
 
   const onDragEnd = (result) => {
