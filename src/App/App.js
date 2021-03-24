@@ -37,12 +37,12 @@ function App() {
   
   return (
     <MainContext.Provider value = {contextParams}>
-    <div className="App">
-      <header className="App-header">
+    <div className="app">
+      <header className="app-header">
         <h1>Algorithm Jumble</h1>
         <div className="row">
           <div className="column">
-            <div className="description-container">
+            <div className="algo-description">
               <Algorithm/>
             </div>
           </div>

@@ -6,14 +6,14 @@ import { DragDropContext, Droppable, Draggable } from 'react-beautiful-dnd';
 
 function Jumble() {
 
-  const mainContext = useContext(MainContext)
+  const context = useContext(MainContext)
   
   //currentAlgorithm will initially come from STORE[algoIndex]
   //I did this here so that when the currentAlgorithm changes
   //the current steps will also change
   useEffect(() => {
-    mainContext.updateSteps([...shuffleSteps(mainContext.currentAlgorithm.steps)])
-  }, [mainContext.currentAlgorithm])
+    context.updateSteps([...shuffleSteps(context.currentAlgorithm.steps)])
+  }, [context.currentAlgorithm])
 
   function shuffleSteps(array) {
     for (let i = array.length - 1; i > 0; i--) {
@@ -26,10 +26,10 @@ function Jumble() {
 
 
   const onDragEnd = (result) => {
-    const steps = Array.from(mainContext.steps);
+    const steps = Array.from(context.steps);
     const [reorderedItem] = steps.splice(result.source.index, 1);
     steps.splice(result.destination.index, 0, reorderedItem);
-    mainContext.updateSteps(steps);
+    context.updateSteps(steps);
   } 
 
 
@@ -40,7 +40,7 @@ function Jumble() {
         <Droppable droppableId="step">
           {(provided) => (
             <ul className="step" {...provided.droppableProps} ref={provided.innerRef}>
-              {mainContext.steps.map(({ id, item }, index) => {
+              {context.steps.map(({ id, item }, index) => {
                 return (
                   <Draggable key={id} draggableId={id} index={index}>
                     {(provided) => (
@@ -48,7 +48,7 @@ function Jumble() {
                         <p>
                           {item}
                         </p>
-                        <div className={"circle " + (id == index ? " blue " : " red ") + mainContext.showHide}></div>
+                        <div className={"circle " + (id == index ? " blue " : " red ") + context.showHide}></div>
                       </li>
                     )}
                   </Draggable>
@@ -59,6 +59,10 @@ function Jumble() {
           )}
         </Droppable>
       </DragDropContext>
+      <div className="row">
+        <div className="column"><button className="submit-button" onClick={context.onCheckPressed}>CHECK</button></div>
+        <div className="column"><button className="next-button" onClick={context.onNextPressed}>NEXT</button></div>
+      </div>
     </>
   );
 

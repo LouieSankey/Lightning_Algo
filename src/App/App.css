@@ -1,35 +1,36 @@
-.App {
+.app {
     text-align: center;
-    margin-right: 40px;
-    margin-left: 40px;
+    margin-right: 10px;
+    margin-left: 10px;
 }
 
-.App-header {
+.app-header {
     display: flex;
     flex-direction: column;
-    align-steps: center;
     justify-content: center;
     font-size: calc(10px + 1.5vmin);
-}
-
-.column {
-    float: left;
-    width: 50%;
-}
-
-.description-container {
-    margin-right: 40px;
 }
 
 .row {
     width: 100%;
 }
 
-
-/* Clear floats after the columns */
-
 .row:after {
     content: "";
     display: table;
     clear: both;
+}
+
+@media (min-width: 600px) {
+    .column {
+        float: left;
+        width: 50%;
+    }
+    .app {
+        margin-right: 40px;
+        margin-left: 40px;
+    }
+    .algo-description {
+        margin-right: 40px;
+    }
 }

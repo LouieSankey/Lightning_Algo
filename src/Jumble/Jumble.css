@@ -11,7 +11,7 @@
 .step li {
     font-size: 14px;
     display: flow-root;
-    align-steps: center;
+    /* align-steps: center; */
     border: solid 2px #d0d0d0;
     border-radius: .2em;
     padding: .5em .8em .5em .5em;
@@ -19,6 +19,7 @@
 }
 
 .step p {
+    text-align: left;
     max-width: none;
     font-weight: bold;
     margin: 0;
