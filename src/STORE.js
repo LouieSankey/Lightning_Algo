@@ -1,13 +1,22 @@
 const STORE = [
-
-
     {
+        id: 0,
         description: {
             name: "Intersection of Two Arrays",
             summary: "Given two integer arrays nums1 and nums2, return an array of their intersection. Each element in the result must appear as many times as it shows in both arrays and you may return the result in any order.",
             input: "Input: nums1 = [4,9,5], nums2 = [9,4,9,8,4]",
             output: "Output: [4,9]",
             explanation: "Explanation: [9,4] is also accepted."
+        },
+
+        //might want to use something like Number.Max_Value for this in the future
+        solveTime: {
+            best: 100000,
+            bestPenalty: 0,
+            bestTotal: 100000,
+            previous: 100000,
+            previousPenalty: 100000,
+            previousTotal: 100000
         },
         steps: [
 
@@ -79,12 +88,21 @@ const STORE = [
     },  
 
     {
+        id: 1,
         description: {
             name: "Roman to Integer",
             summary: "Roman numerals are represented by seven different symbols: I = 1, V = 5, X = 10, L = 50, C =100, D = 500 and M = 1000.   There are six instances where subtraction is used: I can be placed before V (5) and X (10) to make 4 and 9. X can be placed before L (50) and C (100) to make 40 and 90. C can be placed before D (500) and M (1000) to make 400 and 900. Given a roman numeral, convert it to an integer.",
             input: "Input: Input: s = 'LVIII'",
             output: "Output: 58",
             explanation: "Explanation: L = 50, V= 5, III = 3"
+        },
+        solveTime: {
+            best: 100000,
+            bestPenalty: 0,
+            bestTotal: 100000,
+            previous: 100000,
+            previousPenalty: 100000,
+            previousTotal: 100000
         },
         steps: [
            
@@ -157,12 +175,21 @@ const STORE = [
     },
 
     {
+        id: 2,
         description: {
             name: "Pascal's Triangle",
             summary: "Given an integer numRows, return the first numRows of Pascal's triangle. In Pascal's triangle, each number is the sum of the two numbers directly above it",
             input: "Input: numRows = 5",
             output: "Output: [[1],[1,1],[1,2,1],[1,3,3,1],[1,4,6,4,1]]",
             explanation: ""
+        },
+        solveTime: {
+            best: 100000,
+            bestPenalty: 0,
+            bestTotal: 100000,
+            previous: 100000,
+            previousPenalty: 100000,
+            previousTotal: 100000
         },
         steps: [
 

@@ -6,12 +6,12 @@ function Menu() {
     const context = useContext(MainContext)
 
     return (
-        <div class="navbar">
-        <div class="dropdown">
-          <button class="dropbtn">Problem Sets
-            <i class="fa fa-caret-down"></i>
+        <div className="navbar">
+        <div className="dropdown">
+          <button className="dropbtn">Problem Sets
+            <i className="fa fa-caret-down"></i>
           </button>
-          <div class="dropdown-content">
+          <div className="dropdown-content">
             <a href="#">Top 25 Core CS Easy</a>
           </div>
         </div>
