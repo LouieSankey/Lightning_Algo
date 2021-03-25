@@ -19,7 +19,7 @@ function App() {
   const [algoIndex, setAlgoIndex] = useState(0)
   const [algosFromLocalStorage, setAlgosFromLocalStorage] = useState(JSON.parse(localStorage.getItem("Algos")))
   const [steps, updateSteps] = useState(algosFromLocalStorage[algoIndex].steps);
-  const [correctOrderIndicator, setCorrectOrderIndicator] = useState("hide")
+  const [correctOrderIndicator, setCorrectOrderIndicator] = useState("correctOrderIndicator")
   const [startTime, setStartTime] = useState(moment())
   const [currentSolveTime, setCurrentSolveTime] = useState("")
   const [currentPenalty, setCurrentPenalty] = useState("")
@@ -28,7 +28,7 @@ function App() {
     setStartTime(moment())
     setCurrentSolveTime("")
     setCurrentPenalty("")
-    setCorrectOrderIndicator("hide")
+    setCorrectOrderIndicator("correctOrderIndicator")
     if(algoIndex === STORE.length - 1){
       setAlgoIndex(0)
     }else{

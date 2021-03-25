@@ -26,14 +26,6 @@
     float: left;
 }
 
-.circle {
-    float: right;
-    height: 14px;
-    width: 14px;
-    background-color: transparent;
-    border-radius: 50%;
-}
-
 .red {
     /* background-color: red; */
     border: solid 2px rgba(255, 0, 0, 0.541);
@@ -44,7 +36,7 @@
     /* background-color: blue; */
 }
 
-.hide {
+.correctOrderIndicator {
     border: solid 2px #d0d0d0;
     display: none
 }

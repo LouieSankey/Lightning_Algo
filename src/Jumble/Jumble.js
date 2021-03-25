@@ -46,7 +46,6 @@ function Jumble() {
                         <p>
                           {item}
                         </p>
-                        {/* <div className={"circle " + (id == index ? " blue " : " red ") + context.correctOrderIndicator}></div> */}
                       </li>
                     )}
                   </Draggable>
