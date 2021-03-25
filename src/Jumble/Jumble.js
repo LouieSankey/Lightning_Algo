@@ -41,11 +41,12 @@ function Jumble() {
                 return (
                   <Draggable key={id} draggableId={id} index={index}>
                     {(provided) => (
-                      <li key={id} ref={provided.innerRef} {...provided.draggableProps} {...provided.dragHandleProps}>
+                      <li key={id} ref={provided.innerRef} {...provided.draggableProps} {...provided.dragHandleProps} 
+                      className={(id == index ? " blue " : " red ") + context.correctOrderIndicator}>
                         <p>
                           {item}
                         </p>
-                        <div className={"circle " + (id == index ? " blue " : " red ") + context.correctOrderIndicator}></div>
+                        {/* <div className={"circle " + (id == index ? " blue " : " red ") + context.correctOrderIndicator}></div> */}
                       </li>
                     )}
                   </Draggable>
