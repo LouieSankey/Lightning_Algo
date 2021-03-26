@@ -6,6 +6,7 @@ import STORE from '../STORE'
 import MainContext from '../MainContext'
 import Menu from '../Menu/Menu'
 import moment from 'moment'
+require('dotenv').config()
 
 
 function App() {
