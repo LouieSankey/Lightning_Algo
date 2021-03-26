@@ -4,13 +4,13 @@
 }
 
 .step {
-    list-style: none;
+    /* list-style: none; */
     padding-left: 0;
 }
 
 .step li {
     font-size: 14px;
-    display: flow-root;
+    display: flex;
     /* align-steps: center; */
     /* border: solid 2px #d0d0d0; */
     border-radius: .2em;
@@ -39,4 +39,19 @@
 .correctOrderIndicator {
     border: solid 2px #d0d0d0;
     display: none
+}
+
+.submit-button,
+.next-button {
+    width: 100%;
+    padding: 6px 0;
+}
+
+@media (min-width: 600px) {
+    .submit-button,
+    .next-button {
+        height: 40px;
+        width: 100%;
+        padding: 6px 0;
+    }
 }

@@ -40,12 +40,13 @@ header {
     clear: both;
 }
 
+.next-check-buttons-column {
+    float: left;
+    width: 50%;
+}
+
 @media (min-width: 600px) {
     .main-column {
-        float: left;
-        width: 50%;
-    }
-    .next-check-buttons-column {
         float: left;
         width: 50%;
     }
