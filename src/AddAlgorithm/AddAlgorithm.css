@@ -1,0 +1,60 @@
+.modal {
+    position: absolute;
+    right: 0;
+    z-index: 500;
+    background-color: white;
+    width: 100%;
+    border: 1px solid #ccc;
+    box-shadow: 1px 1px 1px black;
+    padding: 16px;
+    box-sizing: border-box;
+    transition: all 0.3s ease-out;
+}
+
+.enter-algorithm-name {
+    width: 100%;
+    font-size: 20px;
+}
+
+.enter-algorithm-description {
+    height: 80px;
+    width: 100%;
+    font-size: 20px;
+}
+
+.enter-algorithm-example {
+    height: 80px;
+    width: 100%;
+    font-size: 20px;
+}
+
+#runtimes {
+    margin-bottom: 6px;
+    width: 100%;
+}
+
+.enter-algorithm-steps {
+    height: 1000px;
+    width: 100%;
+    font-size: 20px;
+}
+
+.add-algo-button {
+    height: 40px;
+    width: 100px;
+    margin-top: 40px;
+    float: right;
+    cursor: pointer;
+}
+
+.patch-current-algorithm {
+    text-decoration: underline;
+    color: blue;
+    cursor: pointer;
+}
+
+@media (min-width: 600px) {
+    .modal {
+        width: 50%;
+    }
+}

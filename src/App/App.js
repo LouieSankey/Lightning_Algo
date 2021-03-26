@@ -6,7 +6,9 @@ import STORE from '../STORE'
 import MainContext from '../MainContext'
 import Menu from '../Menu/Menu'
 import moment from 'moment'
-require('dotenv').config()
+import AddAlgroithm from '../AddAlgorithm/AddAlgorithm'
+
+// require('dotenv').config()
 
 
 function App() {
@@ -24,6 +26,7 @@ function App() {
   const [startTime, setStartTime] = useState(moment())
   const [currentSolveTime, setCurrentSolveTime] = useState("")
   const [currentPenalty, setCurrentPenalty] = useState("")
+  const [toggleAddModal, setToggleAddModal] = useState(false)
  
   const onNextPressed = () => {
     setStartTime(moment())
@@ -73,15 +76,19 @@ function App() {
     steps: steps,
     currentSolveTime: currentSolveTime,
     currentPenalty: currentPenalty,
+    toggleAddModal: toggleAddModal,
+    setToggleAddModal: setToggleAddModal,
     onNextPressed: onNextPressed,
     onCheckPressed: onCheckPressed,
     updateSteps: updateSteps
+
   }
 
   
   return (
     <MainContext.Provider value = {contextParams}>
       <Menu></Menu>
+      {toggleAddModal && <AddAlgroithm/> }
     <div className="app">
       <div className="main">
         <header>

@@ -87,3 +87,11 @@
 .dropdown:hover .dropdown-content {
     display: block;
 }
+
+.admin-gear {
+    margin-top: 6px;
+    margin-right: 30px;
+    height: 30px;
+    float: right;
+    cursor: pointer;
+}
