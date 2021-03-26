@@ -35,6 +35,7 @@ function App() {
     }else{
       setAlgoIndex(algoIndex + 1)
     }
+    window.scrollTo({ top: 0, behavior: 'smooth' })
   }
 
   const onCheckPressed = () => {
@@ -75,7 +76,6 @@ function App() {
     onNextPressed: onNextPressed,
     onCheckPressed: onCheckPressed,
     updateSteps: updateSteps
-   
   }
 
   
