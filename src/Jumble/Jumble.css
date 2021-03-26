@@ -45,12 +45,12 @@
 .next-button {
     width: 100%;
     padding: 6px 0;
+    height: 40px;
 }
 
 @media (min-width: 600px) {
     .submit-button,
     .next-button {
-        height: 40px;
         width: 100%;
         padding: 6px 0;
     }
