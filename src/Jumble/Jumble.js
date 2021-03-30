@@ -8,9 +8,12 @@ function Jumble() {
 
   const context = useContext(MainContext)
   
-  //I did this here to avoid buggy behavior with keeping state for the Dropable interface
   useEffect(() => {
-    context.updateSteps([...shuffleSteps(context.currentAlgorithm.steps)])
+if(context.currentAlgorithm.algo_steps){
+  context.updateSteps([...shuffleSteps(context.currentAlgorithm.algo_steps)])
+
+}
+
   }, [context.currentAlgorithm])
 
   function shuffleSteps(array) {
@@ -20,6 +23,7 @@ function Jumble() {
     }
     return array
 }
+
 
 
   const onDragEnd = (result) => {
@@ -34,6 +38,7 @@ function Jumble() {
     <>
       <h2 className="drag-list-header" >Drag the steps of the algorithm into the correct order.</h2>
       <DragDropContext onDragEnd={onDragEnd}>
+        {console.log(context.steps)}
         <Droppable droppableId="step">
           {(provided) => (
             <ul className="step" {...provided.droppableProps} ref={provided.innerRef}>

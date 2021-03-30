@@ -95,3 +95,12 @@
     float: right;
     cursor: pointer;
 }
+
+.menu-item {
+    cursor: pointer;
+    margin-left: 15px;
+}
+
+.menu-item:hover {
+    background-color: lightgray;
+}
