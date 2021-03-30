@@ -4,7 +4,6 @@ import MainContext from '../MainContext'
 import APIService from '../api_services'
 import Complexities from '../Complexities'
 
-
 const AddAlgorithm = () => {
 
     const context = useContext(MainContext)
@@ -15,11 +14,9 @@ const AddAlgorithm = () => {
     const [addAlgoSpaceComplexity, setAlgoSpaceComplexity] = useState("0(1)")
     const [addAlgoSteps, setAlgoSteps] = useState("")
 
-
     function addAlgo() {
 
         let algoSteps = addAlgoSteps.split('\n').map((step, i) => { return { id: i + "", item: step } })
-        console.log(algoSteps)
         const params = {
             algo_name: addAlgoName,
             algo_description: addAlgoDescription,
@@ -32,7 +29,6 @@ const AddAlgorithm = () => {
             solve_time_penalty: 0,
             best_plus_penalty: 1000000,
         }
-        console.log(params)
         APIService.addAlgorithm(params)
     }
 
@@ -64,11 +60,6 @@ const AddAlgorithm = () => {
                     </select>
                 </div>
             </div>
-
-
-
-
-
             <textarea className={"enter-algorithm-steps"} onChange={(e) => setAlgoSteps(e.target.value)} placeholder="Steps - parsed by line" name="" id=""  ></textarea>
             <button className="add-algo-button" onClick={addAlgo}>Add</button>
         </div>

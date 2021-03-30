@@ -1,5 +1,5 @@
 const Complexities = {
-    "0(1)": "O(1) - Constant",
+    "O(1)": "O(1) - Constant",
     "O(log n)": "O(log n) - Logarithmic",
     "O(n)": "O(n) - Linear",
     "O(n log n)": "O(n log n)	- Linearithmic",
