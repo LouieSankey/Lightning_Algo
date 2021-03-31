@@ -6,7 +6,7 @@ With Lightning Algo, the name of the game is speed. Create custom lists of algor
 
 Lightning Algo gives you a way to quickly and actively review all the algorithms that you need to know for your upcoming interview. 
 
-![lightning_algo](https://user-images.githubusercontent.com/8163492/112932905-a1ae8380-90d3-11eb-817a-a482e90b4b44.png)
+![lightning-algo-screenshot](https://user-images.githubusercontent.com/8163492/113076165-5653ae00-9183-11eb-9b9e-cc32e7fe8f67.jpeg)
 
 
 
