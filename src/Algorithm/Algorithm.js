@@ -19,21 +19,21 @@ function Algorithm() {
       <h3 className="algorithm-header">Example</h3>
       <p className="algorithm-description">{currentAlgorithm.algo_example}</p>
 
-      <div class="row">
-        <div class="column">
+      <div className="row">
+        <div className="column">
           <h3 className={`"algorithm-header no-margin-bottom " + ${timeComplexityCorrect ? " blue " : " red " } + ${context.correctOrderIndicator}`}>Time</h3>
           <select value={context.selectedTimeComplexity} onChange={(e) => context.setSelectedTimeComplexity(e.target.value)} name="runtimes" id="algo-time-complexities">
             {Object.keys(Complexities).map((key, i) => {
-              return <option  value={key}>{Complexities[key]}</option>
+              return <option key={i}  value={key}>{Complexities[key]}</option>
             })}
           </select>
         </div>
 
-        <div class="column">
+        <div className="column">
           <h3 className={`"algorithm-header no-margin-bottom " + ${spaceComplexityCorrect ? " blue " : " red " } + ${context.correctOrderIndicator}`}>Space</h3>
           <select value={context.selectedSpaceComplexity} onChange={(e) => context.setSelectedSpaceComplexity(e.target.value)} name="time-complexity" id="algo-space-complexities">
             {Object.keys(Complexities).map((key, i) => {
-              return <option value={key}>{Complexities[key]}</option>
+              return <option key={i} value={key}>{Complexities[key]}</option>
             })}
           </select>
         </div>

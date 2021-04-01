@@ -46,8 +46,8 @@ function handleAddProblemSet(){
           </button>
 
           <div className="dropdown-content">
-          {allSetNames.map((item) => {
-                return <p className="menu-item" onClick={() => context.setCurrentProblemSet(item.set_name)}>{item.set_name}</p>
+          {allSetNames.map((item, i) => {
+                return <p className="menu-item" key={i}  onClick={() => context.setCurrentProblemSet(item.set_name)}>{item.set_name}</p>
           })}
           
             <input className="problem-set-input" type="text" placeholder="New Algorithm Set" onChange={handleProblemSetNameChanged}/> <button className="add-set-button" onClick={handleAddProblemSet}>Add</button>

@@ -144,7 +144,7 @@ function App() {
       <div className="app">
         <div className="main">
           <header>
-            <h1 className="header-text"><span><img  alt=""/></span>Lightning A<span><img class="lightning" src={require('../Img/bolt.png')} alt=""/></span>go</h1>
+            <h1 className="header-text"><span><img  alt=""/></span>Lightning A<span><img className="lightning" src={require('../Img/bolt.png')} alt=""/></span>go</h1>
             <h2 className="sub-header-text">{currentProblemSet}</h2>
           </header>
           <br />

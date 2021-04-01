@@ -104,22 +104,22 @@ const AddAlgorithm = () => {
             <textarea className={"enter-algorithm-description"} onChange={(e) => setAlgoDescription(e.target.value)} placeholder="Description" name="" id="" value={algoDescription} ></textarea>
             <textarea className={"enter-algorithm-example"} onChange={(e) => setAlgoExample(e.target.value)} value={algoExample} placeholder="Example" name="" id=""  ></textarea>
 
-            <div class="row">
-                <div class="column">
-                    <label for="runtimes">Time</label>
+            <div className="row">
+                <div className="column">
+                    <label htmlFor="runtimes">Time</label>
 
                     <select name="runtimes" value={algoTimeComplexity} onChange={(e) => setAlgoTimeComplexity(e.target.value)} id="runtimes">
                         {Object.keys(Complexities).map((key, i) => {
-                            return <option value={key}>{Complexities[key]}</option>
+                            return <option key={key} value={key}>{Complexities[key]}</option>
                         })}
                     </select>
                 </div>
-                <div class="column">
-                    <label for="space-complexity">Space</label>
+                <div className="column">
+                    <label htmlFor="space-complexity">Space</label>
 
                     <select name="space-complexity" value={algoSpaceComplexity} onChange={(e) => setAlgoSpaceComplexity(e.target.value)} id="space-complexity">
                         {Object.keys(Complexities).map((key, i) => {
-                            return <option value={key}>{Complexities[key]}</option>
+                            return <option key={i} value={key}>{Complexities[key]}</option>
                         })}
                     </select>
                 </div>
