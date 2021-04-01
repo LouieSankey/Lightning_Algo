@@ -46,9 +46,24 @@
     font-size: 20px;
 }
 
+.disabled {
+    background: #999;
+    color: #555;
+    cursor: not-allowed;
+    pointer-events: none;
+}
+
+
+/* .enabled {
+    background: unset;
+    color: unset;
+    cursor: unset;
+    pointer-events: unset;
+} */
+
 .add-algo-button {
     height: 40px;
-    width: 100px;
+    width: 50%;
     margin-top: 40px;
     float: right;
     cursor: pointer;

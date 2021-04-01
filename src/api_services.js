@@ -66,7 +66,7 @@ const APIService = {
 
     patchAlgorithm(algorithm) {
 
-        return fetch(`${config.API_ENDPOINT}/algorithm/${algorithm.problem_set_id}`, {
+        return fetch(`${config.API_ENDPOINT}/algorithms/${algorithm.id}`, {
             method: 'PATCH',
             headers: {
                 'content-type': 'application/json'
