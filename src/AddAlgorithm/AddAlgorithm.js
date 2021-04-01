@@ -44,7 +44,7 @@ const AddAlgorithm = () => {
 
     return (
         <div className="modal">
-            <h2>Add Algorithm - 25 Core CS Easy</h2>
+            <h2>Add Algorithm - {context.currentProblemSet}</h2>
             <p className="patch-current-algorithm">Patch Current</p>
             <textarea className={"enter-algorithm-name"} onChange={(e) => setAlgoName(e.target.value)} placeholder="Name" rows="1" name="" id="" value={algoName} ></textarea>
             <textarea className={"enter-algorithm-description"} onChange={(e) => setAlgoDescription(e.target.value)} placeholder="Description" name="" id="" value={algoDescription} ></textarea>
