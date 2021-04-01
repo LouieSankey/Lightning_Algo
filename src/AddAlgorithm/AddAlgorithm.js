@@ -16,7 +16,7 @@ const AddAlgorithm = () => {
 
     function addAlgo() {
 
-        let algoSteps = addAlgoSteps.split('\n').filter((step) => {return step !== ""})
+        let algoSteps = addAlgoSteps.split('\n').filter((step) => {return step.trim() !== ""})
         .map((step, i) => { return { id: i + "", item: step } })
         console.log(algoSteps)
         const newAlgo = {
