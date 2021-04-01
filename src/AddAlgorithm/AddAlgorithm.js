@@ -16,7 +16,10 @@ const AddAlgorithm = () => {
 
     function addAlgo() {
 
-        let algoSteps = addAlgoSteps.split('\n').map((step, i) => { return { id: i + "", item: step } })
+        let algoSteps = addAlgoSteps.split('\n')
+        .filter((step) => {return step !== ""})
+        .map((step, i) => { return { id: i + "", item: step } })
+        console.log(algoSteps)
         const newAlgo = {
             algo_name: algoName,
             algo_description: algoDescription,
@@ -29,9 +32,9 @@ const AddAlgorithm = () => {
             solve_time_penalty: 0,
             best_plus_penalty: 1000000,
         }
-        APIService.addAlgorithm(newAlgo).then(() => {
-            context.setAlgosFromLocalStorage([...context.algosFromLocalStorage, newAlgo])
-        })
+        // APIService.addAlgorithm(newAlgo).then(() => {
+        //     context.setAlgosFromLocalStorage([...context.algosFromLocalStorage, newAlgo])
+        // })
 
         setAlgoName("")
         setAlgoDescription("")
