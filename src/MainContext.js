@@ -3,7 +3,10 @@ const MainContext = React.createContext({
     onNextPressed: () => {},
     onSubmitPressed: () => {},
     onCheckPressed: () => {},
-    setAlgos: () => {}
+    setAlgos: () => {},
+    setsSelectedTimeComplexity:() => {},
+    setAlgosFromLocalStorage: () => {},
+    setSelectedSpaceComplexity: () => {}
 });
 export default MainContext;
 

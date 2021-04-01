@@ -7,22 +7,22 @@ import { DragDropContext, Droppable, Draggable } from 'react-beautiful-dnd';
 function Jumble() {
 
   const context = useContext(MainContext)
-  
-  useEffect(() => {
-if(context.currentAlgorithm.algo_steps){
-  context.updateSteps([...shuffleSteps(context.currentAlgorithm.algo_steps)])
 
-}
+  useEffect(() => {
+    if (context.currentAlgorithm.algo_steps) {
+      context.updateSteps([...shuffleSteps(context.currentAlgorithm.algo_steps)])
+
+    }
 
   }, [context.currentAlgorithm])
 
   function shuffleSteps(array) {
     for (let i = array.length - 1; i > 0; i--) {
-        const j = Math.floor(Math.random() * (i + 1));
-        [array[i], array[j]] = [array[j], array[i]];
+      const j = Math.floor(Math.random() * (i + 1));
+      [array[i], array[j]] = [array[j], array[i]];
     }
     return array
-}
+  }
 
 
 
@@ -31,14 +31,13 @@ if(context.currentAlgorithm.algo_steps){
     const [reorderedItem] = steps.splice(result.source.index, 1);
     steps.splice(result.destination.index, 0, reorderedItem);
     context.updateSteps(steps);
-  } 
+  }
 
 
   return (
     <>
       <h2 className="drag-list-header" >Drag the steps of the algorithm into the correct order.</h2>
       <DragDropContext onDragEnd={onDragEnd}>
-        {console.log(context.steps)}
         <Droppable droppableId="step">
           {(provided) => (
             <ul className="step" {...provided.droppableProps} ref={provided.innerRef}>
@@ -46,12 +45,17 @@ if(context.currentAlgorithm.algo_steps){
                 return (
                   <Draggable key={id} draggableId={id} index={index}>
                     {(provided) => (
-                      <li key={id} ref={provided.innerRef} {...provided.draggableProps} {...provided.dragHandleProps} 
-                      className={(id == index ? " blue " : " red ") + context.correctOrderIndicator}>
-                        <p>
-                          {item}
-                        </p>
-                      </li>
+                      <>
+                        <li key={id} ref={provided.innerRef} {...provided.draggableProps} {...provided.dragHandleProps}
+                          className={(id == index ? " blue " : " red ") + context.correctOrderIndicator}>
+                          <p>
+                            {item}
+                          </p>
+                        </li>
+
+
+                      </>
+
                     )}
                   </Draggable>
                 );

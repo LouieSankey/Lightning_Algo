@@ -12,7 +12,26 @@
     font-size: 14px;
 }
 
+.red-bolt {
+    height: 30px;
+    margin-left: 10px;
+    margin-bottom: -10px;
+}
+
 #algo-time-complexities,
 #algo-space-complexities {
     width: 100%;
+    padding: 6px;
+}
+
+.time-complexities-correct {
+    border: solid 3px yellow;
+}
+
+.time-complexities-incorrect {
+    border: solid 3px red;
+}
+
+.no-margin-bottom {
+    margin-bottom: 0px;
 }

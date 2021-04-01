@@ -1,4 +1,5 @@
 const Complexities = {
+    "Select": "Select",
     "O(1)": "O(1) - Constant",
     "O(log n)": "O(log n) - Logarithmic",
     "O(n)": "O(n) - Linear",

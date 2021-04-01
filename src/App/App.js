@@ -2,7 +2,6 @@ import React, { useEffect, useState } from 'react';
 import './App.css';
 import Jumble from '../Jumble/Jumble'
 import Algorithm from '../Algorithm/Algorithm'
-import STORE from '../STORE'
 import MainContext from '../MainContext'
 import Menu from '../Menu/Menu'
 import moment from 'moment'
@@ -13,10 +12,6 @@ import APIService from '../api_services'
 
 function App() {
 
-  //load algos into local storage for now to prototype keeping and storing time computations
-  if (!localStorage.getItem("Algos")) {
-    localStorage.setItem("Algos", JSON.stringify(STORE))
-  }
 
   const example = [{
     algo_name: "Example Algorithm",
@@ -26,22 +21,9 @@ function App() {
     spaceComplexity: "O(1)",
     algo_steps: [{
       id: '0',
-      item: 'Example Step 1',
-    },
-    {
-      id: '1',
-      item: 'Example Step 2',
-    }, {
-      id: '2',
-      item: 'Example Step 3',
-    },
-    {
-      id: '3',
-      item: 'Example Step 4',
-    }, {
-      id: '4',
-      item: 'Example Step 5',
-    }],
+      item: 'Empty',
+    }
+    ],
     problem_set: "",
     solve_time_best: 0,
     solve_time_penalty: 0,
@@ -61,14 +43,21 @@ function App() {
   const [currentSolveTime, setCurrentSolveTime] = useState("")
   const [currentPenalty, setCurrentPenalty] = useState("")
   const [toggleAddModal, setToggleAddModal] = useState(false)
-  const [currentProblemSet, setCurrentProblemSet] = useState("Create a New Algorithm Group, then add Algos with the Gear Icon")
+  const [currentProblemSet, setCurrentProblemSet] = useState("Create a New Algorithm Set, then add Algos with the Gear Icon")
 
+
+  const [selectedTimeComplexity, setSelectedTimeComplexity] = useState()
+  const [selectedSpaceComplexity, setSelectedSpaceComplexity] = useState()
 
   useEffect(() => {
+ 
     APIService.getAlgorithmsForProblemSet(currentProblemSet).then((res) => {
       if (res[0]) {
         setAlgosFromLocalStorage(res)
         updateSteps(res[0].algo_steps)
+      }else{
+        setAlgosFromLocalStorage(example)
+        updateSteps(example[0].algo_steps)
       }
 
     })
@@ -76,6 +65,8 @@ function App() {
 
 
   const onNextPressed = () => {
+    setSelectedTimeComplexity("Select")
+    setSelectedSpaceComplexity("Select")
     setStartTime(moment())
     setCurrentSolveTime("")
     setCurrentPenalty("")
@@ -96,22 +87,28 @@ function App() {
       incorrectSteps += (step.id !== i + "") ? 1 : 0
     })
 
-    const solveTimeWithPenalty = Math.round(solveTime.asSeconds()) + incorrectSteps * 60
-    const newPotentialBest = Math.min(algosFromLocalStorage[algoIndex].best_plus_penalty, solveTimeWithPenalty)
+    const timeComplexityPenalty = (algosFromLocalStorage[algoIndex].time_complexity === selectedTimeComplexity) ? 0 : 1
+    const spaceComplexityPenalty = (algosFromLocalStorage[algoIndex].space_complexity === selectedSpaceComplexity) ? 0 : 1
+    
+    const addedPenalty = timeComplexityPenalty + spaceComplexityPenalty
 
-    //temporarily from local storage
+    const solveTimeWithPenalty = Math.round(solveTime.asSeconds()) + (incorrectSteps * 60) + addedPenalty
+    const newPotentialBest = Math.min(algosFromLocalStorage[algoIndex].best_plus_penalty, solveTimeWithPenalty)
     const previousBest = algosFromLocalStorage[algoIndex].best_plus_penalty
 
     if (newPotentialBest < previousBest) {
+
       algosFromLocalStorage[algoIndex].best_plus_penalty = newPotentialBest
       algosFromLocalStorage[algoIndex].solve_time_best = Math.round(solveTime.asSeconds())
-      algosFromLocalStorage[algoIndex].solve_time_penalty = incorrectSteps
+      algosFromLocalStorage[algoIndex].solve_time_penalty = incorrectSteps + addedPenalty
+
+      //need to write this to the DB
+    
     }
 
-    // localStorage.setItem("Algos", JSON.stringify(algosFromLocalStorage))
     setAlgosFromLocalStorage(algosFromLocalStorage)
     setCurrentSolveTime([solveTime.minutes() + "m", solveTime.seconds() + "s"].join(' '))
-    setCurrentPenalty(`+ ${incorrectSteps}m penalty`)
+    setCurrentPenalty(`+ ${incorrectSteps + addedPenalty}m penalty`)
     setCorrectOrderIndicator("")
 
   }
@@ -125,6 +122,12 @@ function App() {
     currentPenalty: currentPenalty,
     toggleAddModal: toggleAddModal,
     currentProblemSet: currentProblemSet,
+    selectedTimeComplexity: selectedTimeComplexity,
+    selectedSpaceComplexity: selectedSpaceComplexity,
+    algosFromLocalStorage: algosFromLocalStorage,
+    setAlgosFromLocalStorage: setAlgosFromLocalStorage,
+    setSelectedTimeComplexity: setSelectedTimeComplexity,
+    setSelectedSpaceComplexity: setSelectedSpaceComplexity,
     setCurrentProblemSet: setCurrentProblemSet,
     setToggleAddModal: setToggleAddModal,
     onNextPressed: onNextPressed,
@@ -141,7 +144,7 @@ function App() {
       <div className="app">
         <div className="main">
           <header>
-            <h1 className="header-text">Algorithm Jumble</h1>
+            <h1 className="header-text"><span><img  alt=""/></span>Lightning A<span><img class="lightning" src={require('../Img/bolt.png')} alt=""/></span>go</h1>
             <h2 className="sub-header-text">{currentProblemSet}</h2>
           </header>
           <br />

@@ -17,7 +17,7 @@ header {
 .sub-header-text {
     margin-top: 0px;
     font-size: 16px;
-    color: rgb(53, 53, 53);
+    color: rgb(168, 168, 168);
 }
 
 .main-row {
@@ -28,6 +28,11 @@ header {
     content: "";
     display: table;
     clear: both;
+}
+
+.lightning {
+    height: 70px;
+    margin-bottom: -26px;
 }
 
 @media (min-width: 600px) {

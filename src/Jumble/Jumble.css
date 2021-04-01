@@ -8,11 +8,19 @@
 }
 
 .step li {
+    color: white;
+    margin-bottom: 0px !important;
     font-size: 14px;
     display: flex;
     border-radius: .2em;
-    padding: .5em .8em .5em .5em;
+    padding: .7em .8em .5em .7em;
     margin-bottom: 1em;
+    background-color: rgba(0, 0, 0, 0.226);
+}
+
+.step li:hover,
+.step li:active {
+    background-color: rgba(80, 80, 80, 0.835);
 }
 
 .step p {
@@ -28,12 +36,12 @@
 }
 
 .blue {
-    border: solid 2px cornflowerblue;
+    border: solid 2px rgb(253, 253, 140);
 }
 
 .correctOrderIndicator {
     border: solid 2px #d0d0d0;
-    display: none
+    /* display: none */
 }
 
 .next-check-buttons-row {

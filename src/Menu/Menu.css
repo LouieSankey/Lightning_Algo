@@ -2,7 +2,8 @@
 
 .navbar {
     overflow: hidden;
-    background-color: #333;
+    background-color: black;
+    /* border-bottom: solid 1px white; */
     font-family: Arial;
 }
 
@@ -30,7 +31,7 @@
 /* Dropdown button */
 
 .dropdown .dropbtn {
-    font-size: 16px;
+    font-size: 18px;
     border: none;
     outline: none;
     color: white;
@@ -48,6 +49,8 @@
 .navbar a:hover,
 .dropdown:hover .dropbtn {
     background-color: red;
+    color: black;
+    cursor: pointer;
 }
 
 
@@ -74,6 +77,10 @@
     text-align: left;
 }
 
+.add-set-button {
+    padding: 10px;
+}
+
 
 /* Add a grey background color to dropdown links on hover */
 
@@ -88,6 +95,10 @@
     display: block;
 }
 
+.problem-set-input {
+    padding: 10px;
+}
+
 .admin-gear {
     margin-top: 10px;
     margin-right: 20px;
@@ -97,8 +108,13 @@
 }
 
 .menu-item {
+    margin: 0px;
+    padding: 15px;
     cursor: pointer;
-    margin-left: 15px;
+    /* margin-left: 15px; */
+    border: solid 1px white;
+    background-color: black;
+    color: white;
 }
 
 .menu-item:hover {

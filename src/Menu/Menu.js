@@ -41,14 +41,16 @@ function handleAddProblemSet(){
     return (
         <div className="navbar">
         <div className="dropdown">
-          <button className="dropbtn">Algorithm Group
+          <button className="dropbtn">Algorithm Set
             <i className="fa fa-caret-down"></i>
           </button>
+
           <div className="dropdown-content">
           {allSetNames.map((item) => {
                 return <p className="menu-item" onClick={() => context.setCurrentProblemSet(item.set_name)}>{item.set_name}</p>
           })}
-            <input type="text" placeholder="New Algorithm Group" onChange={handleProblemSetNameChanged}/> <button onClick={handleAddProblemSet}>Add</button>
+          
+            <input className="problem-set-input" type="text" placeholder="New Algorithm Set" onChange={handleProblemSetNameChanged}/> <button className="add-set-button" onClick={handleAddProblemSet}>Add</button>
           
           </div>
         </div>
