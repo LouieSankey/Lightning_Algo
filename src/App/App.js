@@ -10,6 +10,7 @@ import APIService from '../api_services'
 import { useSelector, useDispatch } from 'react-redux'
 import { reset, increment } from '../features/updateAlgoIndexSlice'
 import { updateSteps } from '../features/updateStepsSlice'
+import { updateAlgorithms, setExampleAlgorithm } from '../features/algorithmSlice'
 
 
 function App() {
@@ -17,36 +18,15 @@ function App() {
   const currentProblemSet = useSelector((state) => state.currentProblemSet.value)
   const algoIndex = useSelector((state) => state.algoIndex.value)
   const steps = useSelector((state) => state.steps.value)
+  const algorithms = useSelector((state) => state.algorithms.value)
 
   const dispatch = useDispatch()
 
-  const example = [{
-    algo_name: "Example Algorithm",
-    algo_description: `Here you will see a description of the algorithm you've added.`,
-    algo_example: "Here you will see any examples you've uploaded.",
-    timeComplexity: "O(n)",
-    spaceComplexity: "O(1)",
-    algo_steps: [{
-      id: '0',
-      item: 'Empty',
-    }
-    ],
-    problem_set: "",
-    solve_time_best: 0,
-    solve_time_penalty: 0,
-    best_plus_penalty: 0,
-  }
-
-  ]
-
-
-  const [algosFromLocalStorage, setAlgosFromLocalStorage] = useState(example)
   const [correctOrderIndicator, setCorrectOrderIndicator] = useState("correctOrderIndicator")
   const [startTime, setStartTime] = useState(moment())
   const [currentSolveTime, setCurrentSolveTime] = useState("")
   const [currentPenalty, setCurrentPenalty] = useState("")
   const [toggleAddModal, setToggleAddModal] = useState(false)
-
   const [selectedTimeComplexity, setSelectedTimeComplexity] = useState()
   const [selectedSpaceComplexity, setSelectedSpaceComplexity] = useState()
 
@@ -54,12 +34,12 @@ function App() {
  
     APIService.getAlgorithmsForProblemSet(currentProblemSet).then((res) => {
       if (res[0]) {
-        setAlgosFromLocalStorage(res)
+        dispatch(updateAlgorithms(res))
         dispatch(updateSteps(res[0].algo_steps))
       }else{
         dispatch(reset())
-        setAlgosFromLocalStorage(example)
-         dispatch(updateSteps(example[0].algo_steps))
+        dispatch(setExampleAlgorithm())
+        dispatch(updateSteps(algorithms[0].algo_steps))
       }
 
     })
@@ -74,11 +54,9 @@ function App() {
     setCurrentPenalty("")
     setCorrectOrderIndicator("correctOrderIndicator")
 
-    if (algoIndex === algosFromLocalStorage.length - 1) {
-      console.log("reset")
+    if (algoIndex === algorithms.length - 1) {
         dispatch(reset())
       } else {
-        console.log("increment")
         dispatch(increment())
       }
  
@@ -93,26 +71,26 @@ function App() {
       incorrectSteps += (step.id !== i + "") ? 1 : 0
     })
 
-    const timeComplexityPenalty = (algosFromLocalStorage[algoIndex].time_complexity === selectedTimeComplexity) ? 0 : 1
-    const spaceComplexityPenalty = (algosFromLocalStorage[algoIndex].space_complexity === selectedSpaceComplexity) ? 0 : 1
-    
+    const timeComplexityPenalty = (algorithms[algoIndex].time_complexity === selectedTimeComplexity) ? 0 : 1
+    const spaceComplexityPenalty = (algorithms[algoIndex].space_complexity === selectedSpaceComplexity) ? 0 : 1
+
     const addedPenalty = timeComplexityPenalty + spaceComplexityPenalty
 
     const solveTimeWithPenalty = Math.round(solveTime.asSeconds()) + (incorrectSteps * 60) + addedPenalty
-    const newPotentialBest = Math.min(algosFromLocalStorage[algoIndex].best_plus_penalty, solveTimeWithPenalty)
-    const previousBest = algosFromLocalStorage[algoIndex].best_plus_penalty
+    const newPotentialBest = Math.min(algorithms[algoIndex].best_plus_penalty, solveTimeWithPenalty)
+    const previousBest = algorithms[algoIndex].best_plus_penalty
 
     if (newPotentialBest < previousBest) {
 
-      algosFromLocalStorage[algoIndex].best_plus_penalty = newPotentialBest
-      algosFromLocalStorage[algoIndex].solve_time_best = Math.round(solveTime.asSeconds())
-      algosFromLocalStorage[algoIndex].solve_time_penalty = incorrectSteps + addedPenalty
+      // algorithms[algoIndex].best_plus_penalty = newPotentialBest
+      // algorithms[algoIndex].solve_time_best = Math.round(solveTime.asSeconds())
+      // algorithms[algoIndex].solve_time_penalty = incorrectSteps + addedPenalty
 
       //need to write this to the DB
     
     }
 
-    setAlgosFromLocalStorage(algosFromLocalStorage)
+    dispatch(updateAlgorithms(algorithms))
     setCurrentSolveTime([solveTime.minutes() + "m", solveTime.seconds() + "s"].join(' '))
     setCurrentPenalty(`+ ${incorrectSteps + addedPenalty}m penalty`)
     setCorrectOrderIndicator("")
@@ -121,15 +99,12 @@ function App() {
 
 
   const contextParams = {
-    currentAlgorithm: algosFromLocalStorage[algoIndex],
     correctOrderIndicator: correctOrderIndicator,
     currentSolveTime: currentSolveTime,
     currentPenalty: currentPenalty,
     toggleAddModal: toggleAddModal,
     selectedTimeComplexity: selectedTimeComplexity,
     selectedSpaceComplexity: selectedSpaceComplexity,
-    algosFromLocalStorage: algosFromLocalStorage,
-    setAlgosFromLocalStorage: setAlgosFromLocalStorage,
     setSelectedTimeComplexity: setSelectedTimeComplexity,
     setSelectedSpaceComplexity: setSelectedSpaceComplexity,
     setToggleAddModal: setToggleAddModal,
@@ -142,8 +117,6 @@ function App() {
   return (
     <MainContext.Provider value={contextParams}>
       <Menu></Menu>
-  
-
       {toggleAddModal && <AddAlgroithm/>}
       <div className="app">
         <div className="main">

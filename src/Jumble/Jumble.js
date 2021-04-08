@@ -5,21 +5,20 @@ import { DragDropContext, Droppable, Draggable } from 'react-beautiful-dnd';
 import { updateSteps } from '../features/updateStepsSlice'
 import { useSelector, useDispatch } from 'react-redux'
 
-
-
 function Jumble() {
 
   const context = useContext(MainContext)
   const dispatch = useDispatch()
   const steps = useSelector((state) => state.steps.value)
+  const algorithms = useSelector((state) => state.algorithms.value)
+  const algoIndex =  useSelector((state) => state.algoIndex.value)
+  const currentAlgorithm = algorithms[algoIndex]
 
   useEffect(() => {
-    if (context.currentAlgorithm.algo_steps) {
-      dispatch(updateSteps([...shuffleSteps(context.currentAlgorithm.algo_steps)]))
-
+    if (currentAlgorithm.algo_steps) {
+      dispatch(updateSteps([...shuffleSteps(currentAlgorithm.algo_steps)]))
     }
-
-  }, [context.currentAlgorithm])
+  }, [currentAlgorithm])
 
   function shuffleSteps(array) {
     array = array.slice()

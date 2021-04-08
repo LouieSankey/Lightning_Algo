@@ -3,14 +3,20 @@ import './Algorithm.css';
 import MainContext from '../MainContext'
 import helpers from '../helpers'
 import Complexities from '../Complexities'
+import { useSelector, useDispatch } from 'react-redux'
+
+
 
 function Algorithm() {
 
-  const context = useContext(MainContext)
-  const currentAlgorithm = context.currentAlgorithm
+  const algorithms = useSelector((state) => state.algorithms.value)
+  const algoIndex =  useSelector((state) => state.algoIndex.value)
+  const currentAlgorithm = algorithms[algoIndex]
 
-  const timeComplexityCorrect = context.currentAlgorithm.time_complexity === context.selectedTimeComplexity
-  const spaceComplexityCorrect  = context.currentAlgorithm.space_complexity === context.selectedSpaceComplexity
+  const context = useContext(MainContext)
+
+  const timeComplexityCorrect = currentAlgorithm.time_complexity === context.selectedTimeComplexity
+  const spaceComplexityCorrect  = currentAlgorithm.space_complexity === context.selectedSpaceComplexity
 
   return (
     <>
