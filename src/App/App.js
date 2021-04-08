@@ -7,11 +7,18 @@ import Menu from '../Menu/Menu'
 import moment from 'moment'
 import AddAlgroithm from '../AddAlgorithm/AddAlgorithm'
 import APIService from '../api_services'
-
+import { useSelector, useDispatch } from 'react-redux'
+import { reset, increment } from '../features/updateAlgoIndexSlice'
+import { updateSteps } from '../features/updateStepsSlice'
 
 
 function App() {
 
+  const currentProblemSet = useSelector((state) => state.currentProblemSet.value)
+  const algoIndex = useSelector((state) => state.algoIndex.value)
+  const steps = useSelector((state) => state.steps.value)
+
+  const dispatch = useDispatch()
 
   const example = [{
     algo_name: "Example Algorithm",
@@ -33,18 +40,12 @@ function App() {
   ]
 
 
-
-  const [algoIndex, setAlgoIndex] = useState(0)
   const [algosFromLocalStorage, setAlgosFromLocalStorage] = useState(example)
-
-  const [steps, updateSteps] = useState(example[0].algo_steps);
   const [correctOrderIndicator, setCorrectOrderIndicator] = useState("correctOrderIndicator")
   const [startTime, setStartTime] = useState(moment())
   const [currentSolveTime, setCurrentSolveTime] = useState("")
   const [currentPenalty, setCurrentPenalty] = useState("")
   const [toggleAddModal, setToggleAddModal] = useState(false)
-  const [currentProblemSet, setCurrentProblemSet] = useState("Create a New Algorithm Set, then add Algos with the Gear Icon")
-
 
   const [selectedTimeComplexity, setSelectedTimeComplexity] = useState()
   const [selectedSpaceComplexity, setSelectedSpaceComplexity] = useState()
@@ -54,32 +55,37 @@ function App() {
     APIService.getAlgorithmsForProblemSet(currentProblemSet).then((res) => {
       if (res[0]) {
         setAlgosFromLocalStorage(res)
-        updateSteps(res[0].algo_steps)
+        dispatch(updateSteps(res[0].algo_steps))
       }else{
+        dispatch(reset())
         setAlgosFromLocalStorage(example)
-        updateSteps(example[0].algo_steps)
+         dispatch(updateSteps(example[0].algo_steps))
       }
 
     })
   }, [currentProblemSet])
 
 
-  const onNextPressed = () => {
+  const OnNextPressed = () => {
     setSelectedTimeComplexity("Select")
     setSelectedSpaceComplexity("Select")
     setStartTime(moment())
     setCurrentSolveTime("")
     setCurrentPenalty("")
     setCorrectOrderIndicator("correctOrderIndicator")
+
     if (algoIndex === algosFromLocalStorage.length - 1) {
-      setAlgoIndex(0)
-    } else {
-      setAlgoIndex(algoIndex + 1)
-    }
+      console.log("reset")
+        dispatch(reset())
+      } else {
+        console.log("increment")
+        dispatch(increment())
+      }
+ 
     window.scrollTo({ top: 0, behavior: 'smooth' })
   }
 
-  const onCheckPressed = () => {
+  const OnCheckPressed = () => {
 
     const solveTime = moment.duration(moment().diff(startTime));
     let incorrectSteps = 0
@@ -117,22 +123,18 @@ function App() {
   const contextParams = {
     currentAlgorithm: algosFromLocalStorage[algoIndex],
     correctOrderIndicator: correctOrderIndicator,
-    steps: steps,
     currentSolveTime: currentSolveTime,
     currentPenalty: currentPenalty,
     toggleAddModal: toggleAddModal,
-    currentProblemSet: currentProblemSet,
     selectedTimeComplexity: selectedTimeComplexity,
     selectedSpaceComplexity: selectedSpaceComplexity,
     algosFromLocalStorage: algosFromLocalStorage,
     setAlgosFromLocalStorage: setAlgosFromLocalStorage,
     setSelectedTimeComplexity: setSelectedTimeComplexity,
     setSelectedSpaceComplexity: setSelectedSpaceComplexity,
-    setCurrentProblemSet: setCurrentProblemSet,
     setToggleAddModal: setToggleAddModal,
-    onNextPressed: onNextPressed,
-    onCheckPressed: onCheckPressed,
-    updateSteps: updateSteps
+    onNextPressed: OnNextPressed,
+    onCheckPressed: OnCheckPressed,
 
   }
 
@@ -140,6 +142,8 @@ function App() {
   return (
     <MainContext.Provider value={contextParams}>
       <Menu></Menu>
+  
+
       {toggleAddModal && <AddAlgroithm/>}
       <div className="app">
         <div className="main">

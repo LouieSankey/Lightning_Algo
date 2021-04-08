@@ -78,7 +78,7 @@ const APIService = {
                     return res.json().then(e => Promise.reject(e))
                 }
 
-                // return res.json()
+                return res.json()
             })
 
     },

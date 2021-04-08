@@ -2,10 +2,15 @@ import React, { useState, useEffect, useContext } from 'react';
 import './Menu.css';
 import MainContext from '../MainContext'
 import APIService from '../api_services'
+import { useDispatch } from 'react-redux'
+import { renameProblemSet } from '../features/renameProblemSetSlice'
 
 const gear = require('../Img/gear_icon.png')
 
+
 function Menu() {
+
+const dispatch = useDispatch()
 
 const context = useContext(MainContext)
 const [newSetName, setNewSetName] = useState("");
@@ -16,8 +21,8 @@ APIService.getProblemSets()
   .then((res) => {
     setAllSetNames(res)
     if(res[0]){
-      context.setCurrentProblemSet(res[0].set_name)
-
+      dispatch(renameProblemSet(res[0].set_name))
+    
     }
   })
 }, [])
@@ -32,7 +37,7 @@ function handleAddProblemSet(){
   APIService.addProblemSet({"set_name": newSetName})
   .then((response) => {
     setAllSetNames([...allSetNames, {set_name: response[0].set_name}])
-    context.setCurrentProblemSet(response[0].set_name)
+      dispatch(renameProblemSet(response[0].set_name))
   })
   setNewSetName("")
   
@@ -47,7 +52,7 @@ function handleAddProblemSet(){
 
           <div className="dropdown-content">
           {allSetNames.map((item, i) => {
-                return <p className="menu-item" key={i}  onClick={() => context.setCurrentProblemSet(item.set_name)}>{item.set_name}</p>
+                return <p className="menu-item" key={i}  onClick={() =>   dispatch(renameProblemSet(item.set_name))}>{item.set_name}</p>
           })}
           
             <input className="problem-set-input" type="text" placeholder="New Algorithm Set" onChange={handleProblemSetNameChanged}/> <button className="add-set-button" onClick={handleAddProblemSet}>Add</button>

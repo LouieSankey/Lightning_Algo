@@ -2,35 +2,42 @@ import React, { useState, useEffect, useContext } from 'react';
 import './Jumble.css';
 import MainContext from '../MainContext'
 import { DragDropContext, Droppable, Draggable } from 'react-beautiful-dnd';
+import { updateSteps } from '../features/updateStepsSlice'
+import { useSelector, useDispatch } from 'react-redux'
+
 
 
 function Jumble() {
 
   const context = useContext(MainContext)
+  const dispatch = useDispatch()
+  const steps = useSelector((state) => state.steps.value)
 
   useEffect(() => {
     if (context.currentAlgorithm.algo_steps) {
-      context.updateSteps([...shuffleSteps(context.currentAlgorithm.algo_steps)])
+      dispatch(updateSteps([...shuffleSteps(context.currentAlgorithm.algo_steps)]))
 
     }
 
   }, [context.currentAlgorithm])
 
   function shuffleSteps(array) {
+    array = array.slice()
     for (let i = array.length - 1; i > 0; i--) {
       const j = Math.floor(Math.random() * (i + 1));
+      if(array[i] && array[j])
       [array[i], array[j]] = [array[j], array[i]];
     }
     return array
   }
 
-
-
   const onDragEnd = (result) => {
-    const steps = Array.from(context.steps);
-    const [reorderedItem] = steps.splice(result.source.index, 1);
-    steps.splice(result.destination.index, 0, reorderedItem);
-    context.updateSteps(steps);
+
+    const localSteps = Array.from(steps);
+    const [reorderedItem] = localSteps.splice(result.source.index, 1);
+    localSteps.splice(result.destination.index, 0, reorderedItem);
+    dispatch(updateSteps(localSteps))
+
   }
 
 
@@ -41,7 +48,7 @@ function Jumble() {
         <Droppable droppableId="step">
           {(provided) => (
             <ul className="step" {...provided.droppableProps} ref={provided.innerRef}>
-              {context.steps.map(({ id, item }, index) => {
+              {steps.map(({ id, item }, index) => {
                 return (
                   <Draggable key={id} draggableId={id} index={index}>
                     {(provided) => (
