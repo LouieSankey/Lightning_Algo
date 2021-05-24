@@ -11,6 +11,8 @@ import { useSelector, useDispatch } from 'react-redux'
 import { reset, increment } from '../features/updateAlgoIndexSlice'
 import { updateSteps } from '../features/updateStepsSlice'
 import { updateAlgorithms, setExampleAlgorithm } from '../features/algorithmSlice'
+import FadeLoader from "react-spinners/FadeLoader"
+
 
 
 function App() {
@@ -29,6 +31,7 @@ function App() {
   const [toggleAddModal, setToggleAddModal] = useState(false)
   const [selectedTimeComplexity, setSelectedTimeComplexity] = useState()
   const [selectedSpaceComplexity, setSelectedSpaceComplexity] = useState()
+  const [isLoading, setIsLoading] = useState(true)
 
   useEffect(() => {
  
@@ -36,6 +39,7 @@ function App() {
       if (res[0]) {
         dispatch(updateAlgorithms(res))
         dispatch(updateSteps(res[0].algo_steps))
+        setIsLoading(false)
       }else{
         dispatch(reset())
         dispatch(setExampleAlgorithm())
@@ -116,6 +120,9 @@ function App() {
 
   return (
     <MainContext.Provider value={contextParams}>
+      {isLoading &&
+          <FadeLoader className="loader" color={'#6b8bba'} size={160}></FadeLoader>
+      }
       <Menu></Menu>
       {toggleAddModal && <AddAlgroithm/>}
       <div className="app">

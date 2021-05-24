@@ -3,6 +3,14 @@
     margin-left: 10px;
 }
 
+.css-kud8pv{
+    position: absolute !important;
+    top: 50% !important;
+    left: 50% !important; 
+
+    transform: translate(-50%, -50%) !important;
+}
+
 header {
     text-align: center;
 }
