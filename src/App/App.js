@@ -1,106 +1,111 @@
-import React, { useEffect, useState } from 'react';
-import './App.css';
-import Jumble from '../Jumble/Jumble'
-import Algorithm from '../Algorithm/Algorithm'
-import MainContext from '../MainContext'
-import Menu from '../Menu/Menu'
-import moment from 'moment'
-import AddAlgroithm from '../AddAlgorithm/AddAlgorithm'
-import APIService from '../api_services'
-import { useSelector, useDispatch } from 'react-redux'
-import { reset, increment } from '../features/updateAlgoIndexSlice'
-import { updateSteps } from '../features/updateStepsSlice'
-import { updateAlgorithms, setExampleAlgorithm } from '../features/algorithmSlice'
-import FadeLoader from "react-spinners/FadeLoader"
-
-
+import React, { useEffect, useState } from "react";
+import "./App.css";
+import Jumble from "../Jumble/Jumble";
+import Algorithm from "../Algorithm/Algorithm";
+import MainContext from "../MainContext";
+import Menu from "../Menu/Menu";
+import moment from "moment";
+import AddAlgroithm from "../AddAlgorithm/AddAlgorithm";
+import APIService from "../api_services";
+import { useSelector, useDispatch } from "react-redux";
+import { reset, increment } from "../features/updateAlgoIndexSlice";
+import { updateSteps } from "../features/updateStepsSlice";
+import {
+  updateAlgorithms,
+  setExampleAlgorithm,
+} from "../features/algorithmSlice";
+import FadeLoader from "react-spinners/FadeLoader";
 
 function App() {
+  const currentProblemSet = useSelector(
+    (state) => state.currentProblemSet.value
+  );
+  const algoIndex = useSelector((state) => state.algoIndex.value);
+  const steps = useSelector((state) => state.steps.value);
+  const algorithms = useSelector((state) => state.algorithms.value);
 
-  const currentProblemSet = useSelector((state) => state.currentProblemSet.value)
-  const algoIndex = useSelector((state) => state.algoIndex.value)
-  const steps = useSelector((state) => state.steps.value)
-  const algorithms = useSelector((state) => state.algorithms.value)
+  const dispatch = useDispatch();
 
-  const dispatch = useDispatch()
-
-  const [correctOrderIndicator, setCorrectOrderIndicator] = useState("correctOrderIndicator")
-  const [startTime, setStartTime] = useState(moment())
-  const [currentSolveTime, setCurrentSolveTime] = useState("")
-  const [currentPenalty, setCurrentPenalty] = useState("")
-  const [toggleAddModal, setToggleAddModal] = useState(false)
-  const [selectedTimeComplexity, setSelectedTimeComplexity] = useState()
-  const [selectedSpaceComplexity, setSelectedSpaceComplexity] = useState()
-  const [isLoading, setIsLoading] = useState(true)
+  const [correctOrderIndicator, setCorrectOrderIndicator] = useState(
+    "correctOrderIndicator"
+  );
+  const [startTime, setStartTime] = useState(moment());
+  const [currentSolveTime, setCurrentSolveTime] = useState("");
+  const [currentPenalty, setCurrentPenalty] = useState("");
+  const [toggleAddModal, setToggleAddModal] = useState(false);
+  const [selectedTimeComplexity, setSelectedTimeComplexity] = useState();
+  const [selectedSpaceComplexity, setSelectedSpaceComplexity] = useState();
+  const [isLoading, setIsLoading] = useState(true);
 
   useEffect(() => {
- 
     APIService.getAlgorithmsForProblemSet(currentProblemSet).then((res) => {
       if (res[0]) {
-        dispatch(updateAlgorithms(res))
-        dispatch(updateSteps(res[0].algo_steps))
-        setIsLoading(false)
-      }else{
-        dispatch(reset())
-        dispatch(setExampleAlgorithm())
-        dispatch(updateSteps(algorithms[0].algo_steps))
+        dispatch(updateAlgorithms(res));
+        dispatch(updateSteps(res[0].algo_steps));
+        setIsLoading(false);
+      } else {
+        dispatch(reset());
+        dispatch(setExampleAlgorithm());
+        dispatch(updateSteps(algorithms[0].algo_steps));
       }
-
-    })
-  }, [currentProblemSet])
-
+    });
+  }, [currentProblemSet]);
 
   const OnNextPressed = () => {
-    setSelectedTimeComplexity("Select")
-    setSelectedSpaceComplexity("Select")
-    setStartTime(moment())
-    setCurrentSolveTime("")
-    setCurrentPenalty("")
-    setCorrectOrderIndicator("correctOrderIndicator")
+    setSelectedTimeComplexity("Select");
+    setSelectedSpaceComplexity("Select");
+    setStartTime(moment());
+    setCurrentSolveTime("");
+    setCurrentPenalty("");
+    setCorrectOrderIndicator("correctOrderIndicator");
 
     if (algoIndex === algorithms.length - 1) {
-        dispatch(reset())
-      } else {
-        dispatch(increment())
-      }
- 
-    window.scrollTo({ top: 0, behavior: 'smooth' })
-  }
+      dispatch(reset());
+    } else {
+      dispatch(increment());
+    }
+
+    window.scrollTo({ top: 0, behavior: "smooth" });
+  };
 
   const OnCheckPressed = () => {
-
     const solveTime = moment.duration(moment().diff(startTime));
-    let incorrectSteps = 0
+    let incorrectSteps = 0;
     steps.forEach((step, i) => {
-      incorrectSteps += (step.id !== i + "") ? 1 : 0
-    })
+      incorrectSteps += step.id !== i + "" ? 1 : 0;
+    });
 
-    const timeComplexityPenalty = (algorithms[algoIndex].time_complexity === selectedTimeComplexity) ? 0 : 1
-    const spaceComplexityPenalty = (algorithms[algoIndex].space_complexity === selectedSpaceComplexity) ? 0 : 1
+    const timeComplexityPenalty =
+      algorithms[algoIndex].time_complexity === selectedTimeComplexity ? 0 : 1;
+    const spaceComplexityPenalty =
+      algorithms[algoIndex].space_complexity === selectedSpaceComplexity
+        ? 0
+        : 1;
 
-    const addedPenalty = timeComplexityPenalty + spaceComplexityPenalty
+    const addedPenalty = timeComplexityPenalty + spaceComplexityPenalty;
 
-    const solveTimeWithPenalty = Math.round(solveTime.asSeconds()) + (incorrectSteps * 60) + addedPenalty
-    const newPotentialBest = Math.min(algorithms[algoIndex].best_plus_penalty, solveTimeWithPenalty)
-    const previousBest = algorithms[algoIndex].best_plus_penalty
+    const solveTimeWithPenalty =
+      Math.round(solveTime.asSeconds()) + incorrectSteps * 60 + addedPenalty;
+    const newPotentialBest = Math.min(
+      algorithms[algoIndex].best_plus_penalty,
+      solveTimeWithPenalty
+    );
+    const previousBest = algorithms[algoIndex].best_plus_penalty;
 
     if (newPotentialBest < previousBest) {
-
       // algorithms[algoIndex].best_plus_penalty = newPotentialBest
       // algorithms[algoIndex].solve_time_best = Math.round(solveTime.asSeconds())
       // algorithms[algoIndex].solve_time_penalty = incorrectSteps + addedPenalty
-
       //need to write this to the DB
-    
     }
 
-    dispatch(updateAlgorithms(algorithms))
-    setCurrentSolveTime([solveTime.minutes() + "m", solveTime.seconds() + "s"].join(' '))
-    setCurrentPenalty(`+ ${incorrectSteps + addedPenalty}m penalty`)
-    setCorrectOrderIndicator("")
-
-  }
-
+    dispatch(updateAlgorithms(algorithms));
+    setCurrentSolveTime(
+      [solveTime.minutes() + "m", solveTime.seconds() + "s"].join(" ")
+    );
+    setCurrentPenalty(`+ ${incorrectSteps + addedPenalty}m penalty`);
+    setCorrectOrderIndicator("");
+  };
 
   const contextParams = {
     correctOrderIndicator: correctOrderIndicator,
@@ -114,21 +119,36 @@ function App() {
     setToggleAddModal: setToggleAddModal,
     onNextPressed: OnNextPressed,
     onCheckPressed: OnCheckPressed,
-
-  }
-
+  };
 
   return (
     <MainContext.Provider value={contextParams}>
-      {isLoading &&
-          <FadeLoader className="loader" color={'#6b8bba'} size={160}></FadeLoader>
-      }
+      {isLoading && (
+        <FadeLoader
+          className="loader"
+          color={"#6b8bba"}
+          size={160}
+        ></FadeLoader>
+      )}
       <Menu></Menu>
-      {toggleAddModal && <AddAlgroithm/>}
+      {toggleAddModal && <AddAlgroithm />}
       <div className="app">
         <div className="main">
           <header>
-            <h1 className="header-text"><span><img  alt=""/></span>Lightning A<span><img className="lightning" src={require('../Img/bolt.png')} alt=""/></span>go</h1>
+            <h1 className="header-text">
+              <span>
+                <img alt="" />
+              </span>
+              Lightning A
+              <span>
+                <img
+                  className="lightning"
+                  src={require("../Img/bolt.png")}
+                  alt=""
+                />
+              </span>
+              go
+            </h1>
             <h2 className="sub-header-text">{currentProblemSet}</h2>
           </header>
           <br />
@@ -145,11 +165,9 @@ function App() {
             </div>
           </section>
           <br />
-          <footer>
-          </footer>
+          <footer></footer>
         </div>
       </div>
-
     </MainContext.Provider>
   );
 }
