@@ -54,16 +54,20 @@ const AddAlgorithm = () => {
       best_plus_penalty: 1000000,
     };
 
-    APIService.addAlgorithm(newAlgo).then(() => {
-      dispatch(updateAlgorithms([...algorithms, newAlgo]));
-    });
+    window.alert(
+      "Thanks for trying Lightning Algo. This is just a demo of what I'm working on so you don't have access to this feature quite yet ;-)"
+    );
 
-    setAlgoName("");
-    setAlgoDescription("");
-    setAlgoExample("");
-    setAlgoTimeComplexity("Select");
-    setAlgoSpaceComplexity("Select");
-    setAlgoSteps("");
+    // APIService.addAlgorithm(newAlgo).then(() => {
+    //   dispatch(updateAlgorithms([...algorithms, newAlgo]));
+    // });
+
+    // setAlgoName("");
+    // setAlgoDescription("");
+    // setAlgoExample("");
+    // setAlgoTimeComplexity("Select");
+    // setAlgoSpaceComplexity("Select");
+    // setAlgoSteps("");
   }
 
   const loadCurrentAlgo = () => {
@@ -109,14 +113,18 @@ const AddAlgorithm = () => {
       solve_time_penalty: 0,
       best_plus_penalty: 1000000,
     };
-    APIService.patchAlgorithm(newAlgo);
 
-    setAlgoName("");
-    setAlgoDescription("");
-    setAlgoExample("");
-    setAlgoTimeComplexity("Select");
-    setAlgoSpaceComplexity("Select");
-    setAlgoSteps("");
+    window.alert(
+      "Thanks for trying Lightning Algo. This is just a demo of what I'm working on so you don't have access to this feature quite yet ;-)"
+    );
+    // APIService.patchAlgorithm(newAlgo);
+
+    // setAlgoName("");
+    // setAlgoDescription("");
+    // setAlgoExample("");
+    // setAlgoTimeComplexity("Select");
+    // setAlgoSpaceComplexity("Select");
+    // setAlgoSteps("");
   };
 
   return (
